@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 import javafx.scene.image.Image;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 
 public class LandFrame extends JInternalFrame {
 
@@ -30,6 +32,7 @@ public class LandFrame extends JInternalFrame {
      * Create the frame.
      */
     public LandFrame() {
+        setBorder(new EmptyBorder(0, 0, 0, 0));
         setResizable(true);
         
         setClosable(true);
@@ -48,7 +51,7 @@ public class LandFrame extends JInternalFrame {
         btnEnter.setBounds(146, 46, 117, 29);
         getContentPane().add(btnEnter);
         
-        
+       
         
     }
 }

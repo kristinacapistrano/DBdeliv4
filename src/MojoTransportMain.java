@@ -80,14 +80,16 @@ public class MojoTransportMain extends JFrame {
         mainPanel.setLayout(new GridLayout(0, 1, 0, 0));
         
         JButton LandButton = new JButton();
-   
         LandButton.setPreferredSize(new Dimension(60, 29));
         LandButton.setInheritsPopupMenu(true);
         LandButton.setText("Land Transport");
         LandButton.setMaximumSize(new Dimension(130, 29));
+        
         LandButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                LandFrame land = new LandFrame();
+                land.setVisible(true);
+                LandButton.add(land);
 
             }
         });
