@@ -35,6 +35,7 @@ import javax.swing.GroupLayout.Alignment;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class MojoTransportMain extends JFrame {
 
@@ -78,20 +79,24 @@ public class MojoTransportMain extends JFrame {
         });
         mainPanel.setLayout(new GridLayout(0, 1, 0, 0));
         
-        JLabel label = new JLabel("");
-        mainPanel.add(label);
-        
-        JLabel label_1 = new JLabel("");
-        mainPanel.add(label_1);
-        
         JButton LandButton = new JButton();
+   
+        LandButton.setPreferredSize(new Dimension(60, 29));
+        LandButton.setInheritsPopupMenu(true);
         LandButton.setText("Land Transport");
         LandButton.setMaximumSize(new Dimension(130, 29));
         LandButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
+
             }
         });
+        
+        JLabel lblMojoTransportCo = new JLabel("Mojo Transport Co. ");
+        lblMojoTransportCo.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+        lblMojoTransportCo.setHorizontalAlignment(SwingConstants.CENTER);
+        lblMojoTransportCo.setForeground(UIManager.getColor("Button.highlight"));
+        mainPanel.add(lblMojoTransportCo);
         mainPanel.add(LandButton);
         
         JButton AirTransport = new JButton("Air Transport");
