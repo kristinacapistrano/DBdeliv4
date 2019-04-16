@@ -139,6 +139,10 @@ public class SeedScript {
         printAll(storage_dock);
         
         printAll(ground_service);
+        printAll(owns);
+
+        printAll(rent);
+        printAll(service_company);
 
 
 
