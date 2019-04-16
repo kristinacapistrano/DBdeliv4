@@ -32,7 +32,6 @@ public class LandFrame extends JInternalFrame {
      * Create the frame.
      */
     public LandFrame() {
-        setBorder(new EmptyBorder(0, 0, 0, 0));
         setResizable(true);
         
         setClosable(true);
@@ -43,12 +42,12 @@ public class LandFrame extends JInternalFrame {
         JTextField txtEnterYourQuery = new JTextField();
         txtEnterYourQuery.setHorizontalAlignment(SwingConstants.CENTER);
         txtEnterYourQuery.setText("Enter your query");
-        txtEnterYourQuery.setBounds(36, 16, 346, 26);
+        txtEnterYourQuery.setBounds(45, 87, 346, 26);
         getContentPane().add(txtEnterYourQuery);
         txtEnterYourQuery.setColumns(10);
         
         JButton btnEnter = new JButton("Enter");
-        btnEnter.setBounds(146, 46, 117, 29);
+        btnEnter.setBounds(147, 125, 117, 29);
         getContentPane().add(btnEnter);
         
        
