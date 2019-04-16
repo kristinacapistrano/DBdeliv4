@@ -88,8 +88,6 @@ public class SeedScript {
 
         water_transportation = genTableTrans(num, "water_transportation");
 
-        //transportation_purpose = populateTableType6(num, "transportation_purpose");
-
         licensed_driver = genTableLic(num, "licensed_driver");
         licensed_captain = genTableLic(num, "licensed_captain");
         licensed_pilot = genTableLic(num, "licensed_pilot");
@@ -106,11 +104,6 @@ public class SeedScript {
         owns = genOwns(num, "owns");
         rent = genRent(num, "rent");
         service_company = genSC(num, "service_company");
-
-
-        
-
-
 
         printAll(ground_company);
 
@@ -151,21 +144,13 @@ public class SeedScript {
 
     }
 
- 
-    
- 
-
-
     static void printAll(String[] in) {
 
         for(String e : in)
 
             System.out.println(e);
 
-
-
-
-        System.out.println("--------");
+        System.out.println("+++++++++++++");
 
     }
 
@@ -179,7 +164,7 @@ public class SeedScript {
 
         if(num < 1) {
 
-            System.out.println("Less than 1 tuples requested. Nothing produced.");
+            System.out.println("Less than 1 tuples requested. Table will be empty ");
 
             return out;
 
