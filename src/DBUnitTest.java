@@ -20,7 +20,7 @@ import org.junit.Test;
 public class DBUnitTest extends DBTestCase{
 
 	private Connection jdbcConnection;
-	private JdbcController controller = new JdbcController("root" , "llamas420");
+	private JdbcController controller = new JdbcController("root" , "root");
 	private FlatXmlDataSet loadedDataSet;
 	
     public DBUnitTest(String name)
@@ -29,7 +29,7 @@ public class DBUnitTest extends DBTestCase{
         System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, "com.mysql.cj.jdbc.Driver" );
         System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:mysql://localhost:3306" );
         System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "root" );
-        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "llamas420" );
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "root" );
 	    System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_SCHEMA, "Mojo");
     }
 	
