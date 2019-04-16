@@ -40,11 +40,11 @@ public class SeedScript {
         
         String[] air_hangar, parking_garage, storage_dock;
 
-        String[] Ground_Service;
+        String[] ground_service;
         
-        String[] Owns, Rent;
+        String[] owns, rent;
         
-        String[] Service_Company;
+        String[] service_company;
 
 
         
@@ -102,6 +102,12 @@ public class SeedScript {
         parking_garage = genStorageTable(num, "parking_garage");
         storage_dock = genStorageTable(num, "storage_dock");
 
+        ground_service = genGS(num, "ground_service");
+        owns = genOwns(num, "owns");
+        rent = genRent(num, "rent");
+        service_company = genSC(num, "service_company");
+
+
         
 
 
@@ -131,6 +137,9 @@ public class SeedScript {
         printAll(air_hangar);
         printAll(parking_garage);
         printAll(storage_dock);
+        
+        printAll(ground_service);
+
 
 
 
@@ -140,6 +149,9 @@ public class SeedScript {
 
  
     
+ 
+
+
     static void printAll(String[] in) {
 
         for(String e : in)
@@ -518,6 +530,237 @@ public class SeedScript {
         return out;
 
     }
+    
+    static String[] genGS(int num, String tableName) {
 
+        String[] out = new String[num];
+
+        
+
+        if(num < 1) {
+
+            System.out.println("Less than 1 tuples requested. Nothing produced.");
+
+            return out;
+
+        }
+
+        boolean isValid = false;
+
+        String[] validTableNames = new String[] {"customer"};
+
+        for(String name : validTableNames)
+
+            if(tableName.equals(name))
+
+                isValid = true;
+
+        
+
+        if(!isValid) {
+
+            System.out.println("Not a tableName! Need all lowercase.");
+
+            return out;
+
+        }
+        
+        String make = "", model = "", type = "", time = "" , location = "" ;
+        
+        
+        
+
+        make += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
+
+        for(int i = 0 ; i < num ; i++) {
+      
+
+            out[i] = INSERT + INTO + tableName + VALUES + "("
+
+                    + APOSTROPHE + make + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + SEPARATOR + APOSTROPHE + type  + APOSTROPHE + 
+                    SEPARATOR + APOSTROPHE + time  + APOSTROPHE + SEPARATOR + APOSTROPHE + location  + APOSTROPHE + ");";
+
+        }
+
+        
+
+        return out;
+
+    }
+    
+    static String[] genOwns(int num, String tableName) {
+
+        String[] out = new String[num];
+
+        
+
+        if(num < 1) {
+
+            System.out.println("Less than 1 tuples requested. Nothing produced.");
+
+            return out;
+
+        }
+
+        boolean isValid = false;
+
+        String[] validTableNames = new String[] {"customer"};
+
+        for(String name : validTableNames)
+
+            if(tableName.equals(name))
+
+                isValid = true;
+
+        
+
+        if(!isValid) {
+
+            System.out.println("Not a tableName! Need all lowercase.");
+
+            return out;
+
+        }
+        
+        String make = "", model = "", address = "";
+        
+        
+        
+
+        make += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
+
+        for(int i = 0 ; i < num ; i++) {
+      
+
+            out[i] = INSERT + INTO + tableName + VALUES + "("
+
+                    + APOSTROPHE + make + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + SEPARATOR + APOSTROPHE + address  + APOSTROPHE +  ");";
+
+        }
+
+        
+
+        return out;
+
+    }
+
+    static String[] genRent(int num, String tableName) {
+
+        String[] out = new String[num];
+
+        
+
+        if(num < 1) {
+
+            System.out.println("Less than 1 tuples requested. Nothing produced.");
+
+            return out;
+
+        }
+
+        boolean isValid = false;
+
+        String[] validTableNames = new String[] {"customer"};
+
+        for(String name : validTableNames)
+
+            if(tableName.equals(name))
+
+                isValid = true;
+
+        
+
+        if(!isValid) {
+
+            System.out.println("Not a tableName! Need all lowercase.");
+
+            return out;
+
+        }
+        
+        String make = "", model = "", customerId = "0000000000";
+        
+        
+        
+
+        make += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
+
+        for(int i = 0 ; i < num ; i++) {
+      
+            customerId = customerId.substring(0, 11 - ((int) (Math.log10(i == 0 ? 1 : i) + 1))) + i;
+
+            out[i] = INSERT + INTO + tableName + VALUES + "("
+
+                    + APOSTROPHE + make + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + SEPARATOR + APOSTROPHE + customerId  + APOSTROPHE +  ");";
+
+        }
+
+        
+
+        return out;
+
+    
+    }
+    
+    static String[] genSC(int num, String tableName) {
+
+        String[] out = new String[num];
+
+        
+
+        if(num < 1) {
+
+            System.out.println("Less than 1 tuples requested. Nothing produced.");
+
+            return out;
+
+        }
+
+        boolean isValid = false;
+
+        String[] validTableNames = new String[] {"customer"};
+
+        for(String name : validTableNames)
+
+            if(tableName.equals(name))
+
+                isValid = true;
+
+        
+
+        if(!isValid) {
+
+            System.out.println("Not a tableName! Need all lowercase.");
+
+            return out;
+
+        }
+        
+        String make = "", model = "", type = "";
+        String address = "", name = "";
+        int contract = 0;
+        
+        
+        
+        
+        
+
+        make += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
+
+        for(int i = 0 ; i < num ; i++) {
+      
+            contract ++;
+           
+            out[i] = INSERT + INTO + tableName + VALUES + "("
+
+                    + APOSTROPHE + make + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + SEPARATOR + APOSTROPHE + type  + APOSTROPHE + 
+                      SEPARATOR + APOSTROPHE + contract  + APOSTROPHE + SEPARATOR + APOSTROPHE + address  + APOSTROPHE + SEPARATOR + APOSTROPHE + name  + APOSTROPHE +");";
+        }
+
+        
+
+        return out;
+
+    }
 }
 
