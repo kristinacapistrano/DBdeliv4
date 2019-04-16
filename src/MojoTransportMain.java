@@ -6,10 +6,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JPopupMenu;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
@@ -40,76 +47,89 @@ import java.awt.Font;
 public class MojoTransportMain extends JFrame {
 
     private JPanel contentPane;
+    private static JdbcController controller;
 
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    MojoTransportMain frame = new MojoTransportMain();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    
-    /**
-     * Create the frame.
-     */
-    public MojoTransportMain() {
-        setName("MainFrame");
-        getContentPane().setBackground(UIManager.getColor("Button.background"));
-        
-        JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(UIManager.getColor("Button.darkShadow"));
-        mainPanel.setForeground(UIManager.getColor("Button.highlight"));
-
-        getContentPane().add(mainPanel, BorderLayout.CENTER);
-        
-        JButton WaterTransport = new JButton("Water Transport");
-        WaterTransport.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        mainPanel.setLayout(new GridLayout(0, 1, 0, 0));
-        
-        JButton LandButton = new JButton();
-        LandButton.setPreferredSize(new Dimension(60, 29));
-        LandButton.setInheritsPopupMenu(true);
-        LandButton.setText("Land Transport");
-        LandButton.setMaximumSize(new Dimension(130, 29));
-        
-        LandButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                LandFrame land = new LandFrame();
-                land.setVisible(true);
-                LandButton.add(land);
-
-            }
-        });
-        
-        JLabel lblMojoTransportCo = new JLabel("Mojo Transport Co. ");
-        lblMojoTransportCo.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-        lblMojoTransportCo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblMojoTransportCo.setForeground(UIManager.getColor("Button.highlight"));
-        mainPanel.add(lblMojoTransportCo);
-        mainPanel.add(LandButton);
-        
-        JButton AirTransport = new JButton("Air Transport");
-        mainPanel.add(AirTransport);
-        mainPanel.add(WaterTransport);
-        setOpacity(1.0f);
-        setTitle("Mojo Transport ");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(0, 0, 750, 500);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    MojoTransportMain(){    
+		JFrame f=new JFrame("Basic Query UI"); 
+					//submit button
+		JButton b=new JButton("Submit");    
+		b.setBounds(150,100,140, 30);
+		JButton b2=new JButton("Submit");    
+		b2.setBounds(150,200,140, 30);
+		JButton b3=new JButton("Show Ground Companies");    
+		b3.setBounds(350,100,200, 30);
+					//enter name label
+		JLabel label = new JLabel();		
+		label.setText("Enter Model to find Vehicle");
+		label.setBounds(0, 10, 150, 100);
+		JLabel label2 = new JLabel();
+		label2.setText("Enter Vehicle for Purpose");
+		label2.setBounds(0, 100, 150, 100);
+					//empty label which will show event after button clicked
+		JTextArea label1 = new JTextArea();
+		label1.setBounds(100, 300, 400, 200);
+					//textfield to enter name
+		JTextField textfield= new JTextField();
+		textfield.setBounds(154, 50, 130, 30);
+		JTextField textfield2= new JTextField();
+		textfield2.setBounds(154, 150, 130, 30);
+					//add to frame
+		f.add(label1);
+		f.add(label2);
+		f.add(textfield);
+		f.add(textfield2);
+		f.add(label);
+		f.add(b);
+		f.add(b2);
+		f.add(b3);
+		f.setSize(600,600);    
+		f.setLayout(null);    
+		f.setVisible(true);    
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.addWindowListener(new WindowAdapter()
+		{
+		    public void windowClosing(WindowEvent we)
+		    {
+		    	controller.cleanUp();
+		    }
+		});
+		
+							//action listener
+		b.addActionListener(new ActionListener() {
+	        
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				    String param = textfield.getText();
+				    String labeltext = controller.findVehicleFromModel(param);
+					label1.setText("Vehicle with model is: " + labeltext);				
+			}          
+	      });
+		
+		b2.addActionListener(new ActionListener() {
+	        
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				    String param = textfield2.getText();
+				    String labeltext = controller.findTasks(param);
+					label1.setText("Purpose: " + labeltext);				
+			}          
+	      });
+		
+		b3.addActionListener(new ActionListener() {
+	        
+			@Override
+			public void actionPerformed(ActionEvent arg0) {				    
+				    String labeltext = controller.showGC();
+					label1.setText(labeltext);				
+			}          
+	      });
+		}         
+	
+	
+		public static void main(String[] args) {
+			controller = new JdbcController(args[0], args[1]);
+		    new MojoTransportMain();    
+		} 
         
         
         
@@ -117,22 +137,4 @@ public class MojoTransportMain extends JFrame {
   
     }
 
-    private static void addPopup(Component component, final JPopupMenu popup) {
-        component.addMouseListener(new MouseAdapter() {
-        	public void mousePressed(MouseEvent e) {
-        		if (e.isPopupTrigger()) {
-        			showMenu(e);
-        		}
-        	}
-        	public void mouseReleased(MouseEvent e) {
-        		if (e.isPopupTrigger()) {
-        			showMenu(e);
-        			
-        		}
-        	}
-        	private void showMenu(MouseEvent e) {
-        		popup.show(e.getComponent(), e.getX(), e.getY());
-        	}
-        });
-    }
-}
+
