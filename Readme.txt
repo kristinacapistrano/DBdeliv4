@@ -11,3 +11,11 @@ Else:
 2. There are 2 command line parameters for MojoTransportMain, they are your username and password
 3. The GUI has 3 functionalities which are self explanatory.
 Some good test paramaters are "honda" for textfield 1 and "Seadoo Spark1" for textfield 2.
+
+How to run unit test:
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:mysql://localhost:3306" );
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "root" );
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "root" );
+
+1. modify these so that the arguments are your connection info with your username and password
+2. Run as junit test.
