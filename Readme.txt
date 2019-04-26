@@ -19,3 +19,6 @@ How to run unit test:
 
 1. modify these so that the arguments are your connection info with your username and password
 2. Run as junit test.
+
+RUNNING SEED SCRIPT 
+- currently this runs on command line with the number of tuples as the first argument. 
