@@ -19,13 +19,7 @@ public class SeedScript {
 
     final static String INSERT = "INSERT ", INTO = "INTO ", VALUES = " VALUES ", SEPARATOR = ", ", APOSTROPHE = "'";
 
-    
 
-    /**
-     * The tables are organized by Heirarchy, 
-     *  where the tables prior will provide FK respectively.
-     * @param args
-     */
     public static void main(String[] args) {
         //tables
         String[] ground_company, air_company, water_company;
@@ -77,15 +71,11 @@ public class SeedScript {
         
 
         ground_company = genTableCompany(num, "ground_company");
-
         air_company = genTableCompany(num, "air_company");
-
         water_company = genTableCompany(num, "water_company");
 
         ground_transportation = genTableTrans(num, "ground_transportation");
-
         air_tranportation = genTableTrans(num, "air_tranportation");
-
         water_transportation = genTableTrans(num, "water_transportation");
 
         licensed_driver = genTableLic(num, "licensed_driver");
@@ -137,11 +127,6 @@ public class SeedScript {
         printAll(rent);
         printAll(service_company);
 
-
-
-
-
-
     }
 
     static void printAll(String[] in) {
@@ -149,8 +134,6 @@ public class SeedScript {
         for(String e : in)
 
             System.out.println(e);
-
-        System.out.println("+++++++++++++");
 
     }
 
@@ -160,28 +143,22 @@ public class SeedScript {
 
         String[] out = new String[num];
 
-        
-
         if(num < 1) {
 
             System.out.println("Less than 1 tuples requested. Table will be empty ");
-
             return out;
-
         }
-
-        
 
         boolean isValid = false;
 
         String[] validTableNames = new String[] {"ground_company", "air_company", "water_company"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
-
+        }
         
 
         if(!isValid) {
@@ -234,13 +211,13 @@ public class SeedScript {
 
         String[] validTableNames = new String[] {"ground_transportation", "air_transportation", "water_transportation"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
 
-        
+        }
 
         if(!isValid) {
 
@@ -292,12 +269,12 @@ public class SeedScript {
 
         String[] validTableNames = new String[] {"licensed_driver", "licensed_pilot", "licensed_captain"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
-
+        }
         
 
         if(!isValid) {
@@ -357,12 +334,12 @@ public class SeedScript {
 
         String[] validTableNames = new String[] {"customer"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
-
+        }
         
 
         if(!isValid) {
@@ -424,12 +401,12 @@ public class SeedScript {
 
         String[] validTableNames = new String[] {"ground_transportation", "air_transportation", "water_transportation"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
-
+        }
         
 
         if(!isValid) {
@@ -482,13 +459,13 @@ public class SeedScript {
 
         String[] validTableNames = new String[] {"air_hangar", "parking_garage", "storage_dock"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
 
-        
+        }
 
         if(!isValid) {
 
@@ -538,12 +515,12 @@ public class SeedScript {
 
         String[] validTableNames = new String[] {"customer"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
-
+        }
         
 
         if(!isValid) {
@@ -595,13 +572,13 @@ public class SeedScript {
 
         String[] validTableNames = new String[] {"customer"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
 
-        
+        }
 
         if(!isValid) {
 
@@ -651,13 +628,13 @@ public class SeedScript {
 
         String[] validTableNames = new String[] {"customer"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
 
-        
+        }
 
         if(!isValid) {
 
@@ -709,13 +686,13 @@ public class SeedScript {
 
         String[] validTableNames = new String[] {"customer"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
 
-        
+        }
 
         if(!isValid) {
 
