@@ -26,20 +26,12 @@ public JdbcController(String s1, String s2) {
 		
 		
 		// Step 4: Make a query
-	/*	rs = stmt.executeQuery("Select * from Ground_Company");
-
-		// Step 5: Display the results
-		while (rs.next()) {
-			System.out.print(rs.getString(1) + "\t");
-			System.out.print(rs.getString(2) + "\t ");
-			System.out.print(rs.getString(3) + "\t ");
-			System.out.println("");
-		} */
+	
 	} catch (Exception exc){
 		exc.printStackTrace();
 	}
 	finally {  // ALWAYS clean up your DB resources
-		//cleanUp();
+		cleanUp();
 	}
 }
 
