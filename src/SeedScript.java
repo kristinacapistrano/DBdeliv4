@@ -194,7 +194,13 @@ public class SeedScript {
         return out;
 
     }
-
+    
+    /**
+     * 
+     * @param num
+     * @param tableName table names for ground_transportation", "air_transportation", "water_transportation
+     * @return
+     */
     static String[] genTableTrans(int num, String tableName) {
 
         String[] out = new String[num];
@@ -253,7 +259,13 @@ public class SeedScript {
         return out;
 
     }
-
+    
+    /**
+     * 
+     * @param num
+     * @param tableName table names : licensed_driver, licensed_captain, licensed_pilot 
+     * @return
+     */
     static String[] genTableLic(int num, String tableName) {
 
         String[] out = new String[num];
@@ -319,6 +331,12 @@ public class SeedScript {
 
     }
 
+    /**
+     * 
+     * @param num
+     * @param tableName table name is customer
+     * @return
+     */
     static String[] customerTable(int num, String tableName) {
 
         String[] out = new String[num];
@@ -384,6 +402,12 @@ public class SeedScript {
 
     }
     
+    /**
+     * 
+     * @param num
+     * @param tableName table name is purpose_table
+     * @return
+     */
     static String[] purposeTable(int num, String tableName) {
 
         String[] out = new String[num];
