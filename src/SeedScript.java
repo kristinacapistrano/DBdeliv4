@@ -1,3 +1,7 @@
+
+import java.sql.Date;
+import java.sql.Time;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -19,18 +23,12 @@ public class SeedScript {
 
     final static String INSERT = "INSERT ", INTO = "INTO ", VALUES = " VALUES ", SEPARATOR = ", ", APOSTROPHE = "'";
 
-    
 
-    /**
-     * The tables are organized by Heirarchy, 
-     *  where the tables prior will provide FK respectively.
-     * @param args
-     */
     public static void main(String[] args) {
         //tables
         String[] ground_company, air_company, water_company;
 
-        String[] ground_transportation, air_tranportation, water_transportation;
+        String[] ground_transportation, air_transportation, water_transportation;
 
         String[] transportation_purpose;
         
@@ -77,15 +75,11 @@ public class SeedScript {
         
 
         ground_company = genTableCompany(num, "ground_company");
-
         air_company = genTableCompany(num, "air_company");
-
         water_company = genTableCompany(num, "water_company");
 
         ground_transportation = genTableTrans(num, "ground_transportation");
-
-        air_tranportation = genTableTrans(num, "air_tranportation");
-
+        air_transportation = genTableTrans(num, "air_transportation");
         water_transportation = genTableTrans(num, "water_transportation");
 
         licensed_driver = genTableLic(num, "licensed_driver");
@@ -113,7 +107,7 @@ public class SeedScript {
 
         printAll(ground_transportation);
 
-        printAll(air_tranportation);
+        printAll(air_transportation);
 
         printAll(water_transportation);
         
@@ -137,11 +131,6 @@ public class SeedScript {
         printAll(rent);
         printAll(service_company);
 
-
-
-
-
-
     }
 
     static void printAll(String[] in) {
@@ -149,8 +138,6 @@ public class SeedScript {
         for(String e : in)
 
             System.out.println(e);
-
-        System.out.println("+++++++++++++");
 
     }
 
@@ -160,28 +147,22 @@ public class SeedScript {
 
         String[] out = new String[num];
 
-        
-
         if(num < 1) {
 
             System.out.println("Less than 1 tuples requested. Table will be empty ");
-
             return out;
-
         }
-
-        
 
         boolean isValid = false;
 
         String[] validTableNames = new String[] {"ground_company", "air_company", "water_company"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
-
+        }
         
 
         if(!isValid) {
@@ -228,19 +209,18 @@ public class SeedScript {
 
         }
 
-        
 
         boolean isValid = false;
 
         String[] validTableNames = new String[] {"ground_transportation", "air_transportation", "water_transportation"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
 
-        
+        }
 
         if(!isValid) {
 
@@ -292,12 +272,12 @@ public class SeedScript {
 
         String[] validTableNames = new String[] {"licensed_driver", "licensed_pilot", "licensed_captain"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
-
+        }
         
 
         if(!isValid) {
@@ -357,12 +337,12 @@ public class SeedScript {
 
         String[] validTableNames = new String[] {"customer"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
-
+        }
         
 
         if(!isValid) {
@@ -422,14 +402,14 @@ public class SeedScript {
 
         boolean isValid = false;
 
-        String[] validTableNames = new String[] {"ground_transportation", "air_transportation", "water_transportation"};
+        String[] validTableNames = new String[] {"transportation_purpose"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
-
+        }
         
 
         if(!isValid) {
@@ -440,11 +420,9 @@ public class SeedScript {
 
         }
 
-        String purpose = "", make = "D" , model = "x";
-        
-
-
-        purpose += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
+        String purpose = "";
+       
+        purpose += tableName.substring(0,9).toUpperCase() + " purpose";
 
         for(int i = 0 ; i < num ; i++) {
 
@@ -452,7 +430,7 @@ public class SeedScript {
 
             out[i] = INSERT + INTO + tableName + VALUES + "("
 
-                    + APOSTROPHE + purpose + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + ");";
+                    + APOSTROPHE + purpose + i + APOSTROPHE   + ");";
 
         }
 
@@ -482,13 +460,13 @@ public class SeedScript {
 
         String[] validTableNames = new String[] {"air_hangar", "parking_garage", "storage_dock"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
 
-        
+        }
 
         if(!isValid) {
 
@@ -520,12 +498,17 @@ public class SeedScript {
 
     }
     
+    /*
+     * Ground Service
+     */
     static String[] genGS(int num, String tableName) {
 
         String[] out = new String[num];
-
+        Random rand = new Random();
+        final int millisInDay = 24*60*60*1000;
+        Time time;  
         
-
+        
         if(num < 1) {
 
             System.out.println("Less than 1 tuples requested. Nothing produced.");
@@ -536,14 +519,14 @@ public class SeedScript {
 
         boolean isValid = false;
 
-        String[] validTableNames = new String[] {"customer"};
+        String[] validTableNames = new String[] {"ground_service"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
-
+        }
         
 
         if(!isValid) {
@@ -553,21 +536,15 @@ public class SeedScript {
             return out;
 
         }
-        
-        String make = "", model = "", type = "", time = "" , location = "" ;
-        
-        
-        
-
-        make += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
+       
 
         for(int i = 0 ; i < num ; i++) {
       
 
             out[i] = INSERT + INTO + tableName + VALUES + "("
 
-                    + APOSTROPHE + make + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + SEPARATOR + APOSTROPHE + type  + APOSTROPHE + 
-                    SEPARATOR + APOSTROPHE + time  + APOSTROPHE + SEPARATOR + APOSTROPHE + location  + APOSTROPHE + ");";
+                    + APOSTROPHE + "Make" + i + APOSTROPHE + SEPARATOR + APOSTROPHE + "Model" + i + APOSTROPHE + SEPARATOR + APOSTROPHE + "Type" + i  + APOSTROPHE + 
+                    SEPARATOR + APOSTROPHE + new Time((long)rand.nextInt(millisInDay)) +  APOSTROPHE + SEPARATOR + APOSTROPHE + "Location" +i + " St" + APOSTROPHE + ");";
 
         }
 
@@ -576,6 +553,13 @@ public class SeedScript {
         return out;
 
     }
+    
+    /**
+     * 
+     * @param num number of tuples it has to make 
+     * @param tableName current table name is - OWNS 
+     * @return
+     */
     
     static String[] genOwns(int num, String tableName) {
 
@@ -593,15 +577,15 @@ public class SeedScript {
 
         boolean isValid = false;
 
-        String[] validTableNames = new String[] {"customer"};
+        String[] validTableNames = new String[] {"owns"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
 
-        
+        }
 
         if(!isValid) {
 
@@ -611,19 +595,13 @@ public class SeedScript {
 
         }
         
-        String make = "", model = "", address = "";
-        
-        
-        
-
-        make += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
-
         for(int i = 0 ; i < num ; i++) {
       
 
             out[i] = INSERT + INTO + tableName + VALUES + "("
 
-                    + APOSTROPHE + make + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + SEPARATOR + APOSTROPHE + address  + APOSTROPHE +  ");";
+                    + APOSTROPHE + "Make" + i + (i+1) + APOSTROPHE + SEPARATOR + APOSTROPHE + "Model" + i+ (i+1) 
+                    + APOSTROPHE + SEPARATOR + APOSTROPHE + "Address" + (i+1) + APOSTROPHE +  ");";
 
         }
 
@@ -633,6 +611,13 @@ public class SeedScript {
 
     }
 
+    /**
+     * 
+     * @param num
+     * @param tableName table name is - rent
+     * @return
+     */
+    
     static String[] genRent(int num, String tableName) {
 
         String[] out = new String[num];
@@ -649,15 +634,15 @@ public class SeedScript {
 
         boolean isValid = false;
 
-        String[] validTableNames = new String[] {"customer"};
+        String[] validTableNames = new String[] {"rent"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
 
-        
+        }
 
         if(!isValid) {
 
@@ -667,20 +652,13 @@ public class SeedScript {
 
         }
         
-        String make = "", model = "", customerId = "0000000000";
-        
-        
-        
-
-        make += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
 
         for(int i = 0 ; i < num ; i++) {
       
-            customerId = customerId.substring(0, 11 - ((int) (Math.log10(i == 0 ? 1 : i) + 1))) + i;
-
             out[i] = INSERT + INTO + tableName + VALUES + "("
 
-                    + APOSTROPHE + make + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + SEPARATOR + APOSTROPHE + customerId  + APOSTROPHE +  ");";
+                    + APOSTROPHE + "Make" + i + APOSTROPHE + SEPARATOR + APOSTROPHE + "Model" 
+                    + i + APOSTROPHE + SEPARATOR + APOSTROPHE + "Customer" + i  + APOSTROPHE +  ");";
 
         }
 
@@ -691,6 +669,12 @@ public class SeedScript {
     
     }
     
+    /**
+     * 
+     * @param num number of tuples
+     * @param tableName table name is service_company
+     * @return
+     */
     static String[] genSC(int num, String tableName) {
 
         String[] out = new String[num];
@@ -707,15 +691,15 @@ public class SeedScript {
 
         boolean isValid = false;
 
-        String[] validTableNames = new String[] {"customer"};
+        String[] validTableNames = new String[] {"service_company"};
 
-        for(String name : validTableNames)
+        for(String name : validTableNames) {
 
             if(tableName.equals(name))
 
                 isValid = true;
 
-        
+        }
 
         if(!isValid) {
 
@@ -725,25 +709,19 @@ public class SeedScript {
 
         }
         
-        String make = "", model = "", type = "";
-        String address = "", name = "";
+    
         int contract = 0;
         
-        
-        
-        
-        
-
-        make += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
-
         for(int i = 0 ; i < num ; i++) {
       
             contract ++;
            
             out[i] = INSERT + INTO + tableName + VALUES + "("
 
-                    + APOSTROPHE + make + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + SEPARATOR + APOSTROPHE + type  + APOSTROPHE + 
-                      SEPARATOR + APOSTROPHE + contract  + APOSTROPHE + SEPARATOR + APOSTROPHE + address  + APOSTROPHE + SEPARATOR + APOSTROPHE + name  + APOSTROPHE +");";
+                    + APOSTROPHE + "Make" + i + APOSTROPHE + SEPARATOR + APOSTROPHE + "Model" + i + APOSTROPHE + SEPARATOR + APOSTROPHE 
+                    + "Type" + i  + APOSTROPHE + 
+                      SEPARATOR + APOSTROPHE + contract  + APOSTROPHE + SEPARATOR + APOSTROPHE 
+                      + "Address" +i   + APOSTROPHE + SEPARATOR + APOSTROPHE + "Name" +i  + APOSTROPHE +");";
         }
 
         
@@ -751,5 +729,7 @@ public class SeedScript {
         return out;
 
     }
+    
+
 }
 
