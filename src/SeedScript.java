@@ -24,7 +24,7 @@ public class SeedScript {
         //tables
         String[] ground_company, air_company, water_company;
 
-        String[] ground_transportation, air_tranportation, water_transportation;
+        String[] ground_transportation, air_transportation, water_transportation;
 
         String[] transportation_purpose;
         
@@ -75,7 +75,7 @@ public class SeedScript {
         water_company = genTableCompany(num, "water_company");
 
         ground_transportation = genTableTrans(num, "ground_transportation");
-        air_tranportation = genTableTrans(num, "air_tranportation");
+        air_transportation = genTableTrans(num, "air_transportation");
         water_transportation = genTableTrans(num, "water_transportation");
 
         licensed_driver = genTableLic(num, "licensed_driver");
@@ -103,7 +103,7 @@ public class SeedScript {
 
         printAll(ground_transportation);
 
-        printAll(air_tranportation);
+        printAll(air_transportation);
 
         printAll(water_transportation);
         
@@ -205,7 +205,6 @@ public class SeedScript {
 
         }
 
-        
 
         boolean isValid = false;
 
@@ -399,7 +398,7 @@ public class SeedScript {
 
         boolean isValid = false;
 
-        String[] validTableNames = new String[] {"ground_transportation", "air_transportation", "water_transportation"};
+        String[] validTableNames = new String[] {"transportation_purpose"};
 
         for(String name : validTableNames) {
 
@@ -417,11 +416,9 @@ public class SeedScript {
 
         }
 
-        String purpose = "", make = "D" , model = "x";
-        
-
-
-        purpose += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
+        String purpose = "";
+       
+        purpose += tableName.substring(0,9).toUpperCase() + " purpose";
 
         for(int i = 0 ; i < num ; i++) {
 
@@ -429,7 +426,7 @@ public class SeedScript {
 
             out[i] = INSERT + INTO + tableName + VALUES + "("
 
-                    + APOSTROPHE + purpose + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + ");";
+                    + APOSTROPHE + purpose + i + APOSTROPHE   + ");";
 
         }
 
