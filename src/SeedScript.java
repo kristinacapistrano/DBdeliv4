@@ -46,10 +46,10 @@ public class SeedScript {
 
 
         
-        int num = 0;
+        int num = Integer.parseInt(args[0]);
 
         boolean valid = false;
-
+        /*
         Scanner num_reader = new Scanner(System.in);
 
         do {
@@ -71,7 +71,7 @@ public class SeedScript {
         } while(!valid);
 
         System.out.println();
-
+        */
         
 
         ground_company = genTableCompany(num, "ground_company");
