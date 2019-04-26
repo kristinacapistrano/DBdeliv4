@@ -1,3 +1,7 @@
+
+import java.sql.Date;
+import java.sql.Time;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -494,12 +498,17 @@ public class SeedScript {
 
     }
     
+    /*
+     * Ground Service
+     */
     static String[] genGS(int num, String tableName) {
 
         String[] out = new String[num];
-
+        Random rand = new Random();
+        final int millisInDay = 24*60*60*1000;
+        Time time;  
         
-
+        
         if(num < 1) {
 
             System.out.println("Less than 1 tuples requested. Nothing produced.");
@@ -510,7 +519,7 @@ public class SeedScript {
 
         boolean isValid = false;
 
-        String[] validTableNames = new String[] {"customer"};
+        String[] validTableNames = new String[] {"ground_service"};
 
         for(String name : validTableNames) {
 
@@ -527,21 +536,15 @@ public class SeedScript {
             return out;
 
         }
-        
-        String make = "", model = "", type = "", time = "" , location = "" ;
-        
-        
-        
-
-        make += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
+       
 
         for(int i = 0 ; i < num ; i++) {
       
 
             out[i] = INSERT + INTO + tableName + VALUES + "("
 
-                    + APOSTROPHE + make + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + SEPARATOR + APOSTROPHE + type  + APOSTROPHE + 
-                    SEPARATOR + APOSTROPHE + time  + APOSTROPHE + SEPARATOR + APOSTROPHE + location  + APOSTROPHE + ");";
+                    + APOSTROPHE + "Make" + i + APOSTROPHE + SEPARATOR + APOSTROPHE + "Model" + i + APOSTROPHE + SEPARATOR + APOSTROPHE + "Type" + i  + APOSTROPHE + 
+                    SEPARATOR + APOSTROPHE + new Time((long)rand.nextInt(millisInDay)) +  APOSTROPHE + SEPARATOR + APOSTROPHE + "Location" +i + " St" + APOSTROPHE + ");";
 
         }
 
@@ -550,6 +553,13 @@ public class SeedScript {
         return out;
 
     }
+    
+    /**
+     * 
+     * @param num number of tuples it has to make 
+     * @param tableName current table name is - OWNS 
+     * @return
+     */
     
     static String[] genOwns(int num, String tableName) {
 
@@ -567,7 +577,7 @@ public class SeedScript {
 
         boolean isValid = false;
 
-        String[] validTableNames = new String[] {"customer"};
+        String[] validTableNames = new String[] {"owns"};
 
         for(String name : validTableNames) {
 
@@ -585,19 +595,13 @@ public class SeedScript {
 
         }
         
-        String make = "", model = "", address = "";
-        
-        
-        
-
-        make += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
-
         for(int i = 0 ; i < num ; i++) {
       
 
             out[i] = INSERT + INTO + tableName + VALUES + "("
 
-                    + APOSTROPHE + make + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + SEPARATOR + APOSTROPHE + address  + APOSTROPHE +  ");";
+                    + APOSTROPHE + "Make" + i + (i+1) + APOSTROPHE + SEPARATOR + APOSTROPHE + "Model" + i+ (i+1) 
+                    + APOSTROPHE + SEPARATOR + APOSTROPHE + "Address" + (i+1) + APOSTROPHE +  ");";
 
         }
 
@@ -607,6 +611,13 @@ public class SeedScript {
 
     }
 
+    /**
+     * 
+     * @param num
+     * @param tableName table name is - rent
+     * @return
+     */
+    
     static String[] genRent(int num, String tableName) {
 
         String[] out = new String[num];
@@ -623,7 +634,7 @@ public class SeedScript {
 
         boolean isValid = false;
 
-        String[] validTableNames = new String[] {"customer"};
+        String[] validTableNames = new String[] {"rent"};
 
         for(String name : validTableNames) {
 
@@ -641,20 +652,13 @@ public class SeedScript {
 
         }
         
-        String make = "", model = "", customerId = "0000000000";
-        
-        
-        
-
-        make += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
 
         for(int i = 0 ; i < num ; i++) {
       
-            customerId = customerId.substring(0, 11 - ((int) (Math.log10(i == 0 ? 1 : i) + 1))) + i;
-
             out[i] = INSERT + INTO + tableName + VALUES + "("
 
-                    + APOSTROPHE + make + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + SEPARATOR + APOSTROPHE + customerId  + APOSTROPHE +  ");";
+                    + APOSTROPHE + "Make" + i + APOSTROPHE + SEPARATOR + APOSTROPHE + "Model" 
+                    + i + APOSTROPHE + SEPARATOR + APOSTROPHE + "Customer" + i  + APOSTROPHE +  ");";
 
         }
 
@@ -665,6 +669,12 @@ public class SeedScript {
     
     }
     
+    /**
+     * 
+     * @param num number of tuples
+     * @param tableName table name is service_company
+     * @return
+     */
     static String[] genSC(int num, String tableName) {
 
         String[] out = new String[num];
@@ -681,7 +691,7 @@ public class SeedScript {
 
         boolean isValid = false;
 
-        String[] validTableNames = new String[] {"customer"};
+        String[] validTableNames = new String[] {"service_company"};
 
         for(String name : validTableNames) {
 
@@ -699,25 +709,19 @@ public class SeedScript {
 
         }
         
-        String make = "", model = "", type = "";
-        String address = "", name = "";
+    
         int contract = 0;
         
-        
-        
-        
-        
-
-        make += tableName.substring(0,1).toUpperCase() + tableName.substring(1);
-
         for(int i = 0 ; i < num ; i++) {
       
             contract ++;
            
             out[i] = INSERT + INTO + tableName + VALUES + "("
 
-                    + APOSTROPHE + make + i + APOSTROPHE + SEPARATOR + APOSTROPHE + model + i + APOSTROPHE + SEPARATOR + APOSTROPHE + type  + APOSTROPHE + 
-                      SEPARATOR + APOSTROPHE + contract  + APOSTROPHE + SEPARATOR + APOSTROPHE + address  + APOSTROPHE + SEPARATOR + APOSTROPHE + name  + APOSTROPHE +");";
+                    + APOSTROPHE + "Make" + i + APOSTROPHE + SEPARATOR + APOSTROPHE + "Model" + i + APOSTROPHE + SEPARATOR + APOSTROPHE 
+                    + "Type" + i  + APOSTROPHE + 
+                      SEPARATOR + APOSTROPHE + contract  + APOSTROPHE + SEPARATOR + APOSTROPHE 
+                      + "Address" +i   + APOSTROPHE + SEPARATOR + APOSTROPHE + "Name" +i  + APOSTROPHE +");";
         }
 
         
@@ -725,5 +729,7 @@ public class SeedScript {
         return out;
 
     }
+    
+
 }
 
