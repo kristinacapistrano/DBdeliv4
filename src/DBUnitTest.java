@@ -16,7 +16,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.junit.Test;
-/*
+
 public class DBUnitTest extends DBTestCase{
 
 	private Connection jdbcConnection;
@@ -56,4 +56,3 @@ public class DBUnitTest extends DBTestCase{
 	}
 
 }
-*/
