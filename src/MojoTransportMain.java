@@ -36,14 +36,14 @@ import java.awt.FlowLayout;
 import java.awt.Dimension;
 import javax.swing.SpringLayout;
 import javax.swing.BoxLayout;
-//import com.jgoodies.forms.layout.FormLayout;
-//import com.jgoodies.forms.layout.ColumnSpec;
-//import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
 
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-//import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -109,33 +109,24 @@ public class MojoTransportMain extends JFrame {
 			       Statement smt = null;
 			       ResultSet rs = null;
 			       String sql =  "Select Make, Model from ground_transportation";
-			       String[] test = new String[20];
 			       try {
                     smt = conn.createStatement();
                     rs = smt.executeQuery(sql);
-                    
-                    int i =0;
                     while(rs.next()) {
-                        //label1.setText("Make is: " + rs.getString(1) + " Model is: " + rs.getString(2));
-                        test[i] = "Make is: " + rs.getString(1) + " Model is: " + rs.getString(2);
-                        i++;
-                        
+                        System.out.println("name is: " + rs.getString(1) + ", address: " + rs.getString(2));
                     }
                     smt.close();
                     rs.close();
                     conn.close();
                     
                 } catch (SQLException e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 			       
 				    String param = textfield.getText();
 				    //String labeltext = controller.findVehicleFromModel(param);
-					//for (int i = 0; i < test.length; i++) {
-					    label1.setText(test[0]);
-					    label1.setText(test[1]);
-				    //}
-
+					//label1.setText("Vehicle with model is: " + labeltext);				
 			}          
 	      });
 		
