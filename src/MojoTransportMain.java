@@ -16,6 +16,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBoxMenuItem;
@@ -91,7 +95,7 @@ public class MojoTransportMain extends JFrame {
 		{
 		    public void windowClosing(WindowEvent we)
 		    {
-		    	controller.cleanUp();
+		    //	controller.cleanUp();
 		    }
 		});
 		
@@ -100,9 +104,29 @@ public class MojoTransportMain extends JFrame {
 	        
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+			       JdbcController control = new JdbcController("root", "Alwaysme1234!");
+			       Connection conn =  control.getConn();
+			       Statement smt = null;
+			       ResultSet rs = null;
+			       String sql =  "Select Make, Model from ground_transportation";
+			       try {
+                    smt = conn.createStatement();
+                    rs = smt.executeQuery(sql);
+                    while(rs.next()) {
+                        System.out.println("name is: " + rs.getString(1) + ", address: " + rs.getString(2));
+                    }
+                    smt.close();
+                    rs.close();
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+			       
 				    String param = textfield.getText();
-				    String labeltext = controller.findVehicleFromModel(param);
-					label1.setText("Vehicle with model is: " + labeltext);				
+				    //String labeltext = controller.findVehicleFromModel(param);
+					//label1.setText("Vehicle with model is: " + labeltext);				
 			}          
 	      });
 		
@@ -111,8 +135,8 @@ public class MojoTransportMain extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				    String param = textfield2.getText();
-				    String labeltext = controller.findTasks(param);
-					label1.setText("Purpose: " + labeltext);				
+				   // String labeltext = controller.findTasks(param);
+					//label1.setText("Purpose: " + labeltext);				
 			}          
 	      });
 		
@@ -120,8 +144,8 @@ public class MojoTransportMain extends JFrame {
 	        
 			@Override
 			public void actionPerformed(ActionEvent arg0) {				    
-				    String labeltext = controller.showGC();
-					label1.setText(labeltext);				
+				 //   String labeltext = controller.showGC();
+					//label1.setText(labeltext);				
 			}          
 	      });
 		}         
